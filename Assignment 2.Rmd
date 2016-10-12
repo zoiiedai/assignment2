@@ -1,11 +1,11 @@
 ---
 title: "Assignment 6 - Social Network Analysis"
 author: "Charles Lang"
-date: "March 5, 2016"
+date: "Oct 13, 2016"
 output: html_document
 ---
 
-In Assignment 6 we will be looking at some disciplinary data from a middle school. The file "discipline-data.csv" shows which teacher sent which student to the principal during the semester.
+In Assignment 2 we will be looking at some disciplinary data from a middle school. The file "discipline-data.csv" shows which teacher sent which student to the principal during the semester.
 
 We will be using the "igraph" package to visualize the disciplinary relationships between teachers and students as a network. You can read more about igraph here:
 
@@ -21,7 +21,7 @@ Before you proceed, you will need to change the data type of the student id vari
 D1$stid <- as.factor(D1$stid)
 ```
 
-igraph requires data to be in a particular structure. There are several structures that it can use but we will be using a combination of an "edge list" and a "vertex list". As you might imagine ehe edge list contains a list of all the relationships between students and teachers and any characteristics of those edges that we might be interested in. There are two essential variables in the edge list a "from" variable and a "to" variable that descibe the relationships between vertices (a disciplinary action is given "from" and teacher "to" a student). While the vertix list contains all the characteristics of those vertices, in our case gender and major.
+igraph requires data to be in a particular structure. There are several structures that it can use but we will be using a combination of an "edge list" and a "vertex list". As you might imagine the edge list contains a list of all the relationships between students and teachers and any characteristics of those edges that we might be interested in. There are two essential variables in the edge list a "from" variable and a "to" variable that descibe the relationships between vertices (a disciplinary action is given "from" and teacher "to" a student). While the vertix list contains all the characteristics of those vertices, in our case gender and major.
 
 So let's convert our data into an edge list!
 
@@ -106,3 +106,6 @@ vertex.size=
 ```
 
 Play around with different graphs and then save your final version to the repo. Create a Zotero item for this R program and then commit, push and pull.
+
+Once you have done this you need to practice with data from our class. Create a network with the data set
+
