@@ -1,15 +1,4 @@
----
-title: "Assignment 6 - Social Network Analysis"
-author: "Charles Lang"
-date: "Oct 13, 2016"
-output: html_document
----
-
-In Assignment 2 we will be looking at some disciplinary data from a middle school. The file "discipline-data.csv" shows which teacher sent which student to the principal during the semester.
-
-We will be using the "igraph" package to visualize the disciplinary relationships between teachers and students as a network. You can read more about igraph here:
-
-http://igraph.org/r/
+## title: "Assignment 6 - Social Network Analysis"
 
 Start by installing the "igraph" package. Once you have installed igraph, load the package.
 
