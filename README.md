@@ -1,5 +1,5 @@
 # Assignment 2
-Social Network Analysis
+### Social Network Analysis
 
 In Assignment 2 we will be looking at some disciplinary data from a middle school. The file "discipline-data.csv" shows which teacher sent which student to the principal during the semester.
 
