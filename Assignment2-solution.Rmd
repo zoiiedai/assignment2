@@ -8,7 +8,32 @@ library(tidyr)
 library(dplyr)
 library(igraph)
 ```
+# Part II
+# Sizing vertices according to disciplinary action
+```{r}
+library(dplyr)
+library(tidyr)
+#Calculate disciplinary action count for students
+S.SUM <- EDGE %>% group_by(to) %>% summarise(sum(count))
+names(S.SUM) <- c("id","count")
+#Calculate disciplinary action count for teachers
+T.SUM <- EDGE %>% group_by(from) %>% summarise(sum(count))
+names(T.SUM) <- c("id","count")
+#Bind the two count data frames
+SUM <- bind_rows(T.SUM, S.SUM)
+#Merge count into vertex list
+VERTEX <- full_join(VERTEX, SUM, by = "id")
+#Regenerate the graph object g using the new data
+g <- graph.data.frame(EDGE, directed=TRUE, vertices=VERTEX)
+#Plot graph shrinking arrow size and sizing vertices to count number
+plot(g,layout=layout.fruchterman.reingold, 
+     vertex.color=as.factor(VERTEX$gender), 
+     edge.arrow.size = 0.5,
+     edge.width=EDGE$count,
+     vertex.size = VERTEX$count*2)
+```
 
+#Part III
 
 #Data Wrangling
 ```{r}
