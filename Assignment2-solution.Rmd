@@ -1,0 +1,67 @@
+---
+title: "Assignment 2 - Social Network Analysis Solution"
+output: html_document
+---
+#Libraries
+```{r}
+library(tidyr)
+library(dplyr)
+library(igraph)
+```
+
+
+#Data Wrangling
+```{r}
+#Read data into
+D1 <- read.csv("HUDK4050_2017_SNA_classes.csv", header = TRUE)
+
+#Merge First.name and Last.name variables to create unique ID because we have duplicate first and last names in the class
+D1 <- tidyr::unite(D1, Name, `Last Name`, `First Name`, sep = " ", remove = TRUE)
+
+#Reshape data to create a "course" variable (you will get a warning because there are missing cells)
+D2 <- tidyr::gather(D1, course.label, course, `Class 1`, `Class 2`, `Class 3`, `Class 4`, `Class 5`, na.rm = TRUE, convert = FALSE)
+
+#Remove the "course.label" variable
+D2 <- dplyr::select(D2, Name, course)
+
+#Remove rows indicating HUDK4050 because all students are in this course and it will overwhelm the graph
+D2 <- dplyr::filter(D2, course > 0, course != "HUDK4050")
+
+#Add a variable to be used to count the courses
+D2$Count <- 1
+
+#Reshape the data to create a person x class matrix
+D3 <- tidyr::spread(D2, course, Count)
+
+#This was a bit of a trick, for the matrix command to work the row names needed to changed from an indice (1,2,3,etc) to the student names 
+row.names(D3) <- D3$Name
+D3$Name <- NULL
+
+D3 <- ifelse(is.na(D3), 0, 1)
+
+#Convert the data from data frame format to matrix format so it can be transposed
+D4 <- as.matrix(D3)
+
+#Transpose matrix to produce a person x person matrix
+D5 <- D4 %*% t(D4)
+diag(D5) <- NA
+
+```
+#Graphing
+```{r}
+g <- graph.adjacency(D5,mode="undirected")
+
+plot(g,layout=layout.fruchterman.reingold, vertex.size=3)
+
+```
+#Centrality
+```{r}
+#Calculate the degree centrality of the nodes, showing who has the most connections
+degree(g)
+
+#Calculate the betweeness centrality, showing how many "shortest paths" pass through each node. This turns out to be uniformative for this graph as there are a bunch of people who are almost equally connected and a bunch of people who are unconnected.
+betweenness(g)
+
+
+```
+
