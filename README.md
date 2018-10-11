@@ -9,7 +9,7 @@ http://igraph.org/r/
 
 The instructions to Assignment 2 are in the Assignment 2.rmd file. Assignments are structured in three parts, in the first part you can just follow along with the code, in the second part you will need to apply the code and in the third part is completely freestyle, apply your new knowledge in a new way. 
 
-**Please complete as much as you can by 11:00am, 10/24/17**
+**Please complete as much as you can by 11:00am, 10/25/18**
 
 Once you have finished, commit, push and pull your assignment back to the main branch.
 
